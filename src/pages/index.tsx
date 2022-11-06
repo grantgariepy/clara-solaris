@@ -90,6 +90,8 @@ const Form = () => {
 const Home = () => {
   const { data: session, status } = useSession();
 
+  const userPic: any = session?.user?.image;
+
   console.log(session);
   if (status === "loading") {
     return <main className="flex flex-col items-center pt-4">Loading...</main>;
@@ -108,7 +110,7 @@ const Home = () => {
             <p>hi {session.user?.name}</p>
             <Image
               className="mask mask-circle"
-              src={session.user?.image}
+              src={userPic}
               alt=""
               layout={"fixed"}
               width={100}
