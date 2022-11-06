@@ -108,7 +108,7 @@ const Home = () => {
             <p>hi {session.user?.name}</p>
             <Image
               className="mask mask-circle"
-              src={session.user?.image!}
+              src={session.user?.image}
               alt=""
               layout={"fixed"}
               width={100}
