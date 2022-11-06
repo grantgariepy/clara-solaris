@@ -1,6 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 import { useState } from "react";
+import Image from "next/image";
 
 const Messages = () => {
   const { data: messages, isLoading } = trpc.guestbook.getAll.useQuery();
@@ -13,7 +14,14 @@ const Messages = () => {
         {messages?.map((msg, index) => {
           return (
             <div key={index}>
-              <img className="mask mask-circle" src={msg.profilePic} alt="" />
+              <Image
+                className="mask mask-circle"
+                src={msg.profilePic}
+                alt=""
+                width={100}
+                height={100}
+                layout={"fixed"}
+              />
               <p>{msg.message}</p>
               <span> -{msg.name}</span>
             </div>
@@ -98,10 +106,13 @@ const Home = () => {
         {session ? (
           <div>
             <p>hi {session.user?.name}</p>
-            <img
+            <Image
               className="mask mask-circle"
               src={session.user?.image!}
               alt=""
+              layout={"fixed"}
+              width={100}
+              height={100}
             />
             <button onClick={() => signOut()}>Logout</button>
             <div className="pt-6">
