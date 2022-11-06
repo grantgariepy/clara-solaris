@@ -13,6 +13,7 @@ const Messages = () => {
         {messages?.map((msg, index) => {
           return (
             <div key={index}>
+              <img className="mask mask-circle" src={msg.profilePic} alt="" />
               <p>{msg.message}</p>
               <span> -{msg.name}</span>
             </div>
@@ -52,6 +53,7 @@ const Form = () => {
             postMessage.mutate({
               name: session.user?.name as string,
               message,
+              profilePic: session.user?.image as string,
             });
           }
 
@@ -65,7 +67,7 @@ const Form = () => {
           minLength={2}
           maxLength={100}
           onChange={(event) => setMessage(event.target.value)}
-          className="rounded-md border-2 border-zinc-800 bg-neutral-900 px-4 py-2 focus:outline-none"
+          className="bg-neutral-900 rounded-md border-2 border-zinc-800 px-4 py-2 focus:outline-none"
         />
         <button
           type="submit"
@@ -80,6 +82,7 @@ const Form = () => {
 const Home = () => {
   const { data: session, status } = useSession();
 
+  console.log(session);
   if (status === "loading") {
     return <main className="flex flex-col items-center pt-4">Loading...</main>;
   }
@@ -88,14 +91,18 @@ const Home = () => {
     <main className="flex flex-col items-center">
       <h1 className="pt-4 text-3xl">Guestbook</h1>
       <p>
-        Tutorial for <code>create-t3-app</code>
+        Tutorial for <code>Grant</code>
       </p>
 
       <div className="pt-10">
         {session ? (
           <div>
             <p>hi {session.user?.name}</p>
-
+            <img
+              className="mask mask-circle"
+              src={session.user?.image!}
+              alt=""
+            />
             <button onClick={() => signOut()}>Logout</button>
             <div className="pt-6">
               <Form />

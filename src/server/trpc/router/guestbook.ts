@@ -8,6 +8,7 @@ export const guestbookRouter = router({
         select: {
           name: true,
           message: true,
+          profilePic: true
         },
         orderBy: {
           createdAt: "desc",
@@ -22,6 +23,7 @@ export const guestbookRouter = router({
       z.object({
         name: z.string(),
         message: z.string(),
+        profilePic: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -30,6 +32,7 @@ export const guestbookRouter = router({
           data: {
             name: input.name,
             message: input.message,
+            profilePic: input.profilePic,
           },
         });
       } catch (error) {

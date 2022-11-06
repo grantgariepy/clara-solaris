@@ -66,8 +66,9 @@ model VerificationToken {
 }
 
 model Guestbook {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  name      String
-  message   String   @db.VarChar(100)
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  name       String
+  message    String   @db.VarChar(100)
+  profilePic String
 }
